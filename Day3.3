@@ -1,0 +1,24 @@
+## Intersection of Two Linked List
+
+#include <bits/stdc++.h> 
+
+int findIntersection(Node *firstHead, Node *secondHead)
+{
+    //Write your code here
+    if(firstHead==NULL || secondHead==NULL)return -1;
+    Node*A = firstHead;
+    Node*B = secondHead;
+    
+    map<Node*,bool>visited;
+    visited[A]=true;
+    
+    while(A != NULL){
+        visited[A]=true;
+        A = A->next;
+    }
+    while(B != NULL){
+        if(visited[B]==true)return B->data;
+        else B = B->next;
+    }
+    return -1;
+}
