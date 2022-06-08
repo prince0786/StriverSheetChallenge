@@ -1,0 +1,13 @@
+## Remove Duplicates From Sorted Array
+
+int removeDuplicates(vector<int> &arr, int n) {
+	// Write your code here.
+    //vector<int>ans;
+          int x = 0;
+        
+        for(int i=1;i<n;++i)
+            if(arr[i]!=arr[x])
+                arr[++x] = arr[i];
+        
+        return (x+1);
+}
