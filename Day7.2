@@ -1,0 +1,31 @@
+## Delete KTH Node From End
+
+#include <bits/stdc++.h> 
+
+
+LinkedListNode<int>* removeKthNode(LinkedListNode<int> *head, int K)
+{
+    // Write your code here.
+    if(head == NULL || K == 0)
+        return head;
+    int n=0;
+    LinkedListNode<int>* temp = head;
+    while(temp != NULL){
+        n++;
+        temp = temp->next;
+    }
+    K = n-K;
+    temp = head;
+    LinkedListNode<int>* prev = NULL;
+    while(K > 0){
+        prev = temp;
+        temp = temp->next;
+        K--;
+    }
+    if(prev != NULL){
+        prev->next = temp->next;
+    }else{
+        head = head->next;
+    }
+    return head;
+}
