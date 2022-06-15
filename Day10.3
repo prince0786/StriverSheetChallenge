@@ -1,0 +1,17 @@
+## Cycle Detection in a Singly Linked List
+
+bool detectCycle(Node *head)
+{
+	//	Write your code here
+    Node *fast=head;
+    Node *slow=head;
+    
+    while(fast->next!=NULL && fast->next->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast){
+            return true;
+        }
+    }
+    return false;
+}
