@@ -1,0 +1,18 @@
+## Search in a 2D Matrix
+
+bool findTargetInMatrix(vector < vector < int >> & mat, int m, int n, int target) {
+    // Write your code here.
+    
+    for(int i=0; i<m; i++){  ////iterate over the row
+        if(mat[i][n-1]>=target){    // //if the last element is greater than the target value then iterate into the col
+        //iteration over the column
+            for(int j=n-1; j>=0; j--){
+                if(mat[i][j] == target) // when element is found return true;
+                    return true;
+            }
+            return false;
+        }
+    }
+    return false;
+ 
+}
