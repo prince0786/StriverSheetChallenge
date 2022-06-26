@@ -1,0 +1,23 @@
+## Level Order Traversal
+
+
+vector<int> getLevelOrder(BinaryTreeNode<int> *root)
+{
+    //  Write your code here.
+    vector<int>temp;
+    queue<BinaryTreeNode<int>*>q;
+    
+    if(root == NULL) return temp;;
+    q.push(root);
+    
+    while(!q.empty()){
+        BinaryTreeNode<int>*front = q.front();
+        temp.push_back(front->val);
+        q.pop();
+        if(front->left != NULL)
+            q.push(front->left);
+        if(front->right != NULL)
+            q.push(front->right);
+    }
+    return temp;
+}
