@@ -1,0 +1,30 @@
+## Complete String
+
+#include<bits/stdc++.h>
+static bool comp(string a, string b){
+    if(a.length()==b.length()) return a<b;
+    return a.length()<b.length();
+}
+
+string completeString(int n, vector<string> &a){
+    // Write your code here.
+    sort(a.begin(), a.end(), comp);
+    string fun = "";
+    unordered_set<string>us(a.begin(), a.end());
+    
+    for(int i = n-1; i>=0; i--){
+        string prefix = "";
+        bool cool = true;
+        for(auto ch : a[i]){
+            prefix += ch;
+            if(us.count(prefix)==0){
+                cool = false;
+                break;
+            }
+        }
+        if(cool && (fun.size()<=a[i].size())){
+            fun = a[i];
+        }
+    }
+    return fun == "" ? "None":fun;
+}
