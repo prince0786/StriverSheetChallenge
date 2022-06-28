@@ -1,0 +1,53 @@
+## Strongly Connected Components
+
+#include<bits/stdc++.h>
+void dfs(int node, vector<int> &vis, stack<int> &st, vector<int> adj[]){
+    vis[node]=1;
+    for(auto it : adj[node]){
+        if(!vis[it])
+            dfs(it,vis,st,adj);
+    }
+    st.push(node);
+}
+void revdfs(int node, vector<int> &vis, vector<int> trap[], vector<int> &res){
+    vis[node]=1;
+    res.push_back(node);
+    for(auto it : trap[node]){
+        if(!vis[it]){
+            revdfs(it, vis, trap, res);
+        }
+    }
+}
+vector<vector<int>> stronglyConnectedComponents(int n, vector<vector<int>> &edges)
+{
+    // Write your code here.
+    vector<vector<int>> ans;
+    vector<int> vis(n,0);
+    vector<int> adj[n];
+    vector<int> trap[n];
+    stack<int>st;
+    
+    for(auto it:edges){
+        adj[it[0]].push_back(it[1]);
+    }
+    for(int i=0; i<n; i++){
+        if(!vis[i])
+            dfs(i,vis, st, adj);
+    }
+    for(int i=0;i<n;i++){
+       vis[i]=0;
+       for(auto it: adj[i]){
+           trap[it].push_back(i);
+       }
+   }
+   while(!st.empty()){
+       int a=st.top();
+       st.pop();
+       if(!vis[a]){
+           vector<int> res;
+           revdfs(a,vis,trap,res);
+           ans.push_back(res);
+       }
+   }
+   return ans;
+}
