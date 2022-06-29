@@ -1,0 +1,43 @@
+## Construct a Binary Tree from inOrder and Postorder Traversal
+
+#include<bits/stdc++.h>
+/************************************************************
+   
+   Following is the TreeNode class structure
+   
+   class TreeNode<T>
+   { 
+   public:
+        T data; 
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+   
+        TreeNode(T data) 
+  		{ 
+            this -> data = data; 
+            left = NULL; 
+            right = NULL; 
+        }
+   };
+ ************************************************************/
+TreeNode<int>*constructBT(vector<int>& inOrder, vector<int>& postOrder, int li, int hi,int lp, int hp, map<int,int> &mp){
+    if(lp<0 || lp>hp) return NULL;
+    int rootData = postOrder[hp];
+    TreeNode<int>* root = new TreeNode<int>(rootData);
+    int index = mp[rootData];
+    int numLeft = lp+index-li;
+    root->left = constructBT(inOrder,postOrder,li,index-1,lp,numLeft-1,mp);
+    root->right = constructBT(inOrder,postOrder,index+1,hi,numLeft,hp-1,mp);
+    return root;
+}
+
+TreeNode<int>* getTreeFromPostorderAndInorder(vector<int>& postOrder, vector<int>& inOrder) 
+{
+	// Write your code here.
+    int n = inOrder.size();
+    map<int,int>mp;
+    for(int i=0; i<n; i++){
+        mp[inOrder[i]]=i;
+    }
+    return constructBT(inOrder,postOrder,0,n-1,0,n-1,mp);
+}
