@@ -1,0 +1,29 @@
+## Word Break
+
+#include<bits/stdc++.h>
+bool wordBreak(vector < string > & arr, int n, string & target) {
+    // Write your code here.
+    if(arr.size()==0)
+        {
+            return false;
+        }
+        vector<bool>mp(target.size()+1,false);
+        mp[0] = true;
+        for(int i=1;i<=target.size();i++)
+        {
+            for(int j=i-1;j>=0;j--)
+            {
+                if(mp[j]){
+                    string word = target.substr(j,i-j);
+                    auto it = find(arr.begin(),arr.end(),word);
+                    if(it!=arr.end())
+                    {
+                        mp[i] = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return mp[target.size()];
+    
+}
