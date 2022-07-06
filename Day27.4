@@ -1,0 +1,34 @@
+## Job Sequencing Problem
+
+#include<bits/stdc++.h>
+bool comparison(vector<int> &a, vector<int> &b){
+    return (a[1] > b[1]);
+}
+
+int jobScheduling(vector<vector<int>> &jobs)
+{
+    // Write your code here
+    int n = jobs.size();
+    sort(jobs.begin(), jobs.end(), comparison);
+    int maxDeadline = 0;
+    
+    for(int i=0; i<n; i++)
+        maxDeadline = max(maxDeadline, jobs[i][0]);
+    
+    vector<int> ans(maxDeadline+1, -1);
+    for(int i=0; i<n; i++){
+        int temp = jobs[i][0];
+        for(int j = temp; j>0; j--){
+            if(ans[j] == -1){
+                ans[j] = jobs[i][1];
+                break;
+            }
+        }
+    }
+    int maxi = 0;
+    for(int i=1; i<=maxDeadline; i++){
+        if(ans[i] != -1)
+            maxi += ans[i];
+    }
+    return maxi;
+}
