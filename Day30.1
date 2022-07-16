@@ -1,0 +1,19 @@
+## SubSet Sum
+
+#include<bits/stdc++.h>
+void solve(int i, int sum, vector<int>num, vector<int> &subsetSum){
+    if(i == num.size()){
+        subsetSum.push_back(sum);
+        return;
+    }
+    solve(i+1,sum+num[i], num, subsetSum);
+    solve(i+1, sum, num, subsetSum);
+}
+vector<int> subsetSum(vector<int> &num)
+{
+    // Write your code here.
+    vector<int>subsetSum;
+    solve(0,0,num,subsetSum);
+    sort(subsetSum.begin(), subsetSum.end());
+    return subsetSum;
+}
