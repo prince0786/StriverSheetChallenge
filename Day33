@@ -1,0 +1,27 @@
+## Maximum Increasing SubSequence
+
+int maxIncreasingDumbbellsSum(vector<int> &rack, int n)
+{
+	// Write your code here
+    vector<int> dp(n, -1);
+    int maxi=0;
+    
+    for(int i=0; i<n; i++){
+        int ans = 0;
+        for(int j=0; j<i; j++){
+            if(rack[j] < rack[i]){
+                ans = max(ans, dp[j]);
+            }
+        }
+        if(ans ==0){
+            dp[i]=rack[i];
+        }
+        else{
+            dp[i] = ans+rack[i];
+        }
+        if(dp[i]>maxi)
+            maxi = dp[i];
+    }
+    
+    return maxi;
+}
