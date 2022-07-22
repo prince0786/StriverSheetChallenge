@@ -1,0 +1,20 @@
+## Kth Largest Element in Unsorted Array
+
+#include<bits/stdc++.h>
+int kthLargest(vector<int>& arr, int size, int K)
+{
+	// Write your code here.
+    priority_queue<int>maxi;
+    for(int i=0; i<size; i++){
+        maxi.push(arr[i]);
+    } 
+    while(K){
+        if(K==1)
+            return maxi.top();
+        maxi.pop();
+        K--;
+    }
+    return 0;
+   /* sort(arr.begin(), arr.end());
+    return arr[size - K]; */
+}
