@@ -1,0 +1,24 @@
+## Kth Element of Two Sorted Array
+
+int ninjaAndLadoos(vector<int> &row1, vector<int> &row2, int m, int n, int k) {
+    // Write your code here.   TC : O(N)
+    int temp[m+n];
+    int i=0, j=0, d=0;
+    while(i<m && j<n){
+        if(row1[i]<row2[j]){
+            temp[d++] = row1[i++];
+        }
+        else{
+            temp[d++] = row2[j++];
+        }
+    }
+    while(i<m){
+        temp[d++] = row1[i++];
+    }
+    while(j<n){
+        temp[d++] = row2[j++];
+    }
+    return temp[k-1]; 
+    
+   
+}
