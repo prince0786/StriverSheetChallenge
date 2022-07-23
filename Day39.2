@@ -1,0 +1,22 @@
+## Median of two Sorted Array
+
+#include<bits/stdc++.h>
+double median(vector<int> a, vector<int> b)
+{
+    // Write your code here.
+    vector<int> C((int)a.size() + (int)b.size());
+    
+    merge(a.begin(), a.end(), b.begin(), b.end(), C.begin());
+    
+    int size = C.size();
+    
+    double median;
+    
+    if(size % 2 == 1) {
+        median = C[size/2];
+    }
+    else {
+        median = ((double)C[size/2 - 1] + C[size/2]) / 2.0;
+    }
+    return median;
+}
