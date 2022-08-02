@@ -1,0 +1,34 @@
+
+
+#include<bits/stdc++.h>
+/*
+	This is signature of helper function 'knows'.
+	You should not implement it, or speculate about its implementation.
+
+	bool knows(int A, int B); 
+	Function 'knows(A, B)' will returns "true" if the person having
+	id 'A' know the person having id 'B' in the party, "false" otherwise.
+*/
+
+//Hint:- 
+    /* Let's assume that 0 is the celeb. Now keep traversing all the people from 1 all the way to n - 1. Now, at each person, there are two possibilities, either our current celeb knows that person or he doesn't. If our celeb doesn't know that person then that person can't be a celeb and if our celeb knows that person then our current celeb is not really a celeb. 
+
+ 
+
+Notice that at each know(celeb, i) call we are rejecting one of the ith person or current celeb. Therefore when our current celeb knows the ith person (just assume) then that person is our current possible celeb as we have rejected all other persons till now.
+
+ 
+
+Now once we have completely traversed the array we will have a celeb, just check if this celeb satisfies the conditions of being a celeb. */
+
+int findCelebrity(int n) {
+ 	// Write your code here.
+    int celeb = 0;
+    for (int i = 1; i < n; i++)
+        if (knows(celeb, i))
+            swap(i, celeb);        
+    for (int i = 0; i < n; i++)        
+        if ((!knows(i, celeb) && i != celeb) || (knows(celeb, i) && i != celeb))
+            return -1;
+    return celeb;
+}
